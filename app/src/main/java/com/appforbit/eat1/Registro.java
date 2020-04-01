@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +38,6 @@ public class Registro extends AppCompatActivity {
 
     private Button CreateAccountButton;
     private EditText InputName, InputPassword, InputEmail;
-    private ProgressDialog loadingBar;
 
 
     @Override
@@ -49,7 +49,6 @@ public class Registro extends AppCompatActivity {
         InputName = (EditText) findViewById(R.id.register_username_input);
         InputPassword = (EditText) findViewById(R.id.register_password_input);
         InputEmail = (EditText) findViewById(R.id.register_email_input);
-        loadingBar = new ProgressDialog(this);
 
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +57,6 @@ public class Registro extends AppCompatActivity {
                 CreateAccountButton();
             }
         });
-
-
     }
 
 
@@ -73,28 +70,23 @@ public class Registro extends AppCompatActivity {
         {
             Toast.makeText(this, "Por favor, escribe tu nombre", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(name))
+        else if (TextUtils.isEmpty(password))
         {
             Toast.makeText(this, "Por favor, escribe tu contraseña", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(name))
+        else if (TextUtils.isEmpty(email))
         {
             Toast.makeText(this, "Por favor, escribe tu email", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            //loadingBar.setTitle("Crear cuenta");
-            //loadingBar.setMessage("Por favor espere, verificando información.");
-            //loadingBar.setCanceledOnTouchOutside(false);
-            //loadingBar.show();
-
             ValidateUsername(name, password, email);
         }
     }
 
     private void ValidateUsername(String name, String password, String email){
         int usuario = 0;
-        usuario=BuscarPasswordUsuario();
+        usuario=BuscarCorreoUsuario();
         if (usuario>0){
             Toast.makeText(getApplicationContext(), " El correo electrónico ingresado ya está asignado a un usuario ", Toast.LENGTH_LONG).show();
         } else{
@@ -119,13 +111,12 @@ public class Registro extends AppCompatActivity {
         return cn;
     }
 
-    public int BuscarPasswordUsuario(){
-        String correo = InputEmail.getText().toString();
-        String password = InputPassword.getText().toString();
+    public int BuscarCorreoUsuario(){
+        String correoBCU = InputEmail.getText().toString();
         int id = 0;
         try {
             Statement st = conexionBD().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM [eatasty].[dbo].[users] WHERE correoU = '"+correo+"'");
+            ResultSet rs = st.executeQuery("SELECT * FROM [eatasty].[dbo].[users] WHERE correoU = '"+correoBCU+"'");
             while (rs.next()) {
                 id=rs.getInt(1);
             }
@@ -164,10 +155,11 @@ public class Registro extends AppCompatActivity {
             st.setBoolean(10,veganoReg);
             st.setBoolean(11,noTransgenicoReg);
             st.executeUpdate();
-
-            Toast.makeText(getApplicationContext()," Usuario creado ",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext()," Usuario creado ",Toast.LENGTH_SHORT).show();
+            finish();
         }catch(SQLException ex){
-            Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 }

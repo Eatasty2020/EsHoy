@@ -32,19 +32,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        img = (ImageView)findViewById(R.id.imageView);
 
         botonUnirseAhora = (Button) findViewById(R.id.main_IngresarAhoraBtn);
         loginBoton = (Button) findViewById(R.id.main_loginBtn);
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1000);
+        }
 
-        loginBoton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view)
-            {
-                Intent intent = new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
-            }
-        });
 
         botonUnirseAhora.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,18 +48,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Registro.class);
                 startActivity(intent);
             }
-
         });
 
-
-        img = (ImageView)findViewById(R.id.imageView);
-
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1000);
-        }
-
-
-
+        loginBoton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                Intent intent = new Intent(MainActivity.this, Login.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -116,18 +108,4 @@ public class MainActivity extends AppCompatActivity {
             img.setImageBitmap(imageBitmap);
         }
     }
-
-    //Lanzador de Login
-    public void Login(View view){
-        Intent login = new Intent(this, Login.class);
-        startActivity(login);
-    }
-
-    //Lanzador de Eventos
-    public void Evento(View view){
-        Intent evento = new Intent(this, Eventos.class);
-        startActivity(evento);
-    }
-
-
 }

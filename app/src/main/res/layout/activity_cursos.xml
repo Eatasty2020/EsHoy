@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.appforbit.eat1.Eventos">
+    tools:context="com.appforbit.eat1.Cursos">
 
     <TextView
-        android:id="@+id/tituloEventos"
+        android:id="@+id/tituloCursos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/tituloEventos"
+        android:text="@string/tituloCursos"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,6 +18,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.001" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

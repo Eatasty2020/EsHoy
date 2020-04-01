@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#AFADAD"
+    android:padding="16dp"
+    tools:context=".MenuPrincipal">
+
+    <ImageView
+        android:id="@+id/imginfo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/information"
+        android:src="@drawable/info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"/>
+
+    <TextView
+        android:gravity="center"
+        android:text="@string/infoquienessomos"
+        android:layout_below="@+id/imginfo"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold|italic"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

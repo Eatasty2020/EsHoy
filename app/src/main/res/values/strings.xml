@@ -4,13 +4,49 @@
     <string name="tituloApp"> EATASTY </string>
     <string name="subtitulo">Tips para celíacos, diabéticos, hipertensos, ovolactovegetarianos, veganos y no transgénicos.</string>
     <string name="botonLogin"> Login </string>
-    <string name="botonEventos"> EVENTOS </string>
     <string name="ProBit">Diseñada por el equipo ProBit para el Programa b_IT de CUTI e INEFOP.</string>
     <!--Activity Login-->
     <string name="tituloLogin"> LOGIN </string>
     <string name="botonConectar"> Iniciar Sesion </string>
     <string name="botonRegistrarse"> Registrarte </string>
     <string name="OlvidoPassword"> LOGIN </string>
+    <!--Activity Menu Principal -->
+    <string name="tituloMenuPrincipal"> Menu Principal </string>
+    <string name="botonLugares"> Lugares </string>
+    <string name="botonProductos"> Productos </string>
+    <string name="botonRecetas"> Recetas </string>
+    <string name="botonCursos"> Cursos </string>
+    <string name="botonEventos"> Eventos </string>
+    <string name="botonAcercade"> Acerca de </string>
+    <!--Activity Lugares-->
+    <string name="tituloLugares"> LUGARES </string>
+
+    <!--Activity Productos-->
+    <string name="tituloProductos"> PRODUCTOS </string>
+
+    <!--Activity Recetas-->
+    <string name="tituloRecetas"> RECETAS </string>
+
+    <!--Activity Cursos-->
+    <string name="tituloCursos"> CURSOS </string>
+
     <!--Activity Eventos-->
-    <string name="tituloEventos">EVENTOS</string>
+    <string name="tituloEventos"> EVENTOS </string>
+
+    <!--Activity Pop Up-->
+    <string name="quienessomos"> ¿Quiénes somos? </string>
+    <string name="infoquienessomos"> Aplicación diseñada por el equipo ProBit para el programa b_IT de CUTI e INEFOP. </string>
+    <string name="information">Inform</string>
+    <string name="title_activity_pop_up_info">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="todo">TODO</string>
+
 </resources>

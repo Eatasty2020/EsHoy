@@ -16,7 +16,7 @@
         android:src="@drawable/applogo" />
 
     <EditText
-        android:id="@+id/login_username_input"
+        android:id="@+id/login_email_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_applogo"
@@ -24,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/inputs"
-        android:hint="Nombre de usuario"
+        android:hint="e-mail"
         android:inputType="text"
         android:padding="20dp"
         android:textColor="@color/colorPrimaryDark"
@@ -36,7 +36,7 @@
         android:id="@+id/login_password_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_username_input"
+        android:layout_below="@+id/login_email_input"
         android:background="@drawable/inputs"
         android:padding="20dp"
         android:layout_marginLeft="15dp"
