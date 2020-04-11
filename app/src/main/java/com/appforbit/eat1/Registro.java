@@ -94,28 +94,13 @@ public class Registro extends AppCompatActivity {
         }
     }
 
-    public Connection conexionBD() {
-        Connection cn = null;
-        String urlDB = "jdbc:jtds:sqlserver://eatasty.mssql.somee.com:1433/eatasty";
-        String userDB = "glorenzo68_SQLLogin_1";
-        String passwordDB = "qlwnekx8xb";
-        try{
-            StrictMode.ThreadPolicy politica = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(politica);
-            Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-            cn = DriverManager.getConnection(urlDB,userDB,passwordDB);
-            Toast.makeText(getApplicationContext(),"Enlace establecido", Toast.LENGTH_SHORT).show();
-        } catch(Exception e){
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        return cn;
-    }
-
     public int BuscarCorreoUsuario(){
         String correoBCU = InputEmail.getText().toString();
         int id = 0;
+        Connection con = ConexionBD.conexionBD(this);
         try {
-            Statement st = conexionBD().createStatement();
+            Statement st = null;
+            st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM [eatasty].[dbo].[users] WHERE correoU = '"+correoBCU+"'");
             while (rs.next()) {
                 id=rs.getInt(1);
@@ -138,27 +123,28 @@ public class Registro extends AppCompatActivity {
         boolean olvReg = false;
         boolean veganoReg = false;
         boolean noTransgenicoReg = false;
+        Connection con = ConexionBD.conexionBD(this);
         try{
-            PreparedStatement st;
-            st = conexionBD().prepareStatement("INSERT INTO users (correoU, passwordU, nombreU," +
+            String consulta ="INSERT INTO [eatasty].[dbo].[users] (correoU, passwordU, nombreU," +
                     " apellidoU, paisU, celiacoU, diabeticoU, hipertensoU, olvU, veganoU, noTransgenicoU)" +
-                    " VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-            st.setString(1, correoReg);
-            st.setString(2, passwordReg);
-            st.setString(3, nombreReg);
-            st.setString(4,apellidoReg);
-            st.setString(5,paisReg);
-            st.setBoolean(6,celiacoReg);
-            st.setBoolean(7,diabeticoReg);
-            st.setBoolean(8,hipertensoReg);
-            st.setBoolean(9,olvReg);
-            st.setBoolean(10,veganoReg);
-            st.setBoolean(11,noTransgenicoReg);
-            st.executeUpdate();
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement sentencia = con.prepareStatement(consulta);
+            sentencia.setString(1, correoReg);
+            sentencia.setString(2, passwordReg);
+            sentencia.setString(3, nombreReg);
+            sentencia.setString(4,apellidoReg);
+            sentencia.setString(5,paisReg);
+            sentencia.setBoolean(6,celiacoReg);
+            sentencia.setBoolean(7,diabeticoReg);
+            sentencia.setBoolean(8,hipertensoReg);
+            sentencia.setBoolean(9,olvReg);
+            sentencia.setBoolean(10,veganoReg);
+            sentencia.setBoolean(11,noTransgenicoReg);
+            sentencia.executeUpdate();
             Toast.makeText(getApplicationContext()," Usuario creado ",Toast.LENGTH_SHORT).show();
             finish();
-        }catch(SQLException ex){
-            Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_SHORT).show();
+        }catch(Exception ex){
+            Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_LONG).show();
             finish();
         }
     }

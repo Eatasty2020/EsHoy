@@ -20,6 +20,13 @@
     <string name="botonAcercade"> Acerca de </string>
     <!--Activity Lugares-->
     <string name="tituloLugares"> LUGARES </string>
+    <string name="tvNombre">NOMBRE</string>
+    <string name="tvTipo">Tipo</string>
+    <string name="tvPais">País</string>
+    <string name="tvCiudad">Ciudad</string>
+    <string name="tvCalle">Calle</string>
+    <string name="tvTelefono">Teléfono</string>
+    <string name="ivFoto">Foto</string>
 
     <!--Activity Productos-->
     <string name="tituloProductos"> PRODUCTOS </string>

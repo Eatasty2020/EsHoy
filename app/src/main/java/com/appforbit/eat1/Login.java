@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -39,28 +40,14 @@ public class Login extends AppCompatActivity {
         });
     }
 
-     public Connection conexionBD(){
-         Connection cn = null;
-         String urlDB = "jdbc:jtds:sqlserver://eatasty.mssql.somee.com:1433/eatasty";
-         String userDB = "glorenzo68_SQLLogin_1";
-         String passwordDB = "qlwnekx8xb";
-         try{
-             StrictMode.ThreadPolicy politica = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-             StrictMode.setThreadPolicy(politica);
-             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-             cn = DriverManager.getConnection(urlDB,userDB,passwordDB);
-             Toast.makeText(getApplicationContext(),"Enlace establecido", Toast.LENGTH_SHORT).show();
-         } catch(Exception e){
-             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-         }
-         return cn;
-     }
      public int BuscarUsuario(){
          String correo = emailET.getText().toString();
          String password = passwordET.getText().toString();
          id=0;
+         Connection con =ConexionBD.conexionBD(this);
          try {
-             Statement st = conexionBD().createStatement();
+             Statement st = null;
+             st = con.createStatement();
              ResultSet rs = st.executeQuery("SELECT * FROM [eatasty].[dbo].[users] WHERE correoU = '"+correo+"' AND passwordU = '"+password+"'");
              while (rs.next()) {
                 id=rs.getInt(1);
