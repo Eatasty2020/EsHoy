@@ -11,8 +11,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConexionBD extends AppCompatActivity {
-/*
-    public static Connection conexionBD(Context contexto){
+
+    public static Connection conexionBD(){
         Connection cn = null;
         String urlDB = "jdbc:jtds:sqlserver://eatasty.mssql.somee.com:1433/eatasty";
         String userDB = "glorenzo68_SQLLogin_1";
@@ -22,13 +22,12 @@ public class ConexionBD extends AppCompatActivity {
             StrictMode.setThreadPolicy(politica);
             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
             cn = DriverManager.getConnection(urlDB,userDB,passwordDB);
-            Toast.makeText(contexto,"Enlace establecido", Toast.LENGTH_SHORT).show();
         } catch(Exception e){
-            Toast.makeText(contexto, e.getMessage(), Toast.LENGTH_LONG).show();
+            e.getMessage().toString();
         }
         return cn;
     }
-*/
+
     public static Connection conexionBD(Context contexto) {
         Connection con =null;
         String urlDB = "jdbc:jtds:sqlserver://eatasty.mssql.somee.com:1433/eatasty";

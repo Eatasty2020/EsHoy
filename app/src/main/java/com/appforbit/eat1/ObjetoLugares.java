@@ -15,13 +15,13 @@ public class ObjetoLugares {
     private String calleLug ="";
     private String telefonoLug ="";
     private float calificacionLug =0;
-    private Bitmap fotoLug;
+    private byte[] fotoLug;
 
     public ObjetoLugares() {
     }
 
     public ObjetoLugares(int idL, String nombreL, String tipoL, String paisL, String ciudadL, String calleL,
-                         String telefonoL, float calificacionL, Bitmap fotoL) {
+                         String telefonoL, float calificacionL, byte[] fotoL) {
         this.idLug = idL;
         this.nombreLug = nombreL;
         this.tipoLug = tipoL;
@@ -66,7 +66,7 @@ public class ObjetoLugares {
         return calificacionLug;
     }
 
-    public Bitmap getFotoLug() {
+    public byte[] getFotoLug() {
         return fotoLug;
     }
 
@@ -103,7 +103,7 @@ public class ObjetoLugares {
         this.calificacionLug = calificacionLug;
     }
 
-    public void setFotoLug(Bitmap fotoLug) {
+    public void setFotoLug(byte[] fotoLug) {
         this.fotoLug = fotoLug;
     }
 

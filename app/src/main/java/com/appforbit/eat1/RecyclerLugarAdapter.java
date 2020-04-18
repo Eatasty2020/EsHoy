@@ -1,5 +1,8 @@
 package com.appforbit.eat1;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +61,8 @@ public class RecyclerLugarAdapter extends RecyclerView.Adapter<RecyclerLugarAdap
         holder.paisTV.setText(listaLugares.get(position).getPaisLug());
         holder.telefonoTV.setText(listaLugares.get(position).getTelefonoLug());
         holder.calificacionTV.setRating(listaLugares.get(position).getCalificacionLug());
-        holder.fotoLug.setImageBitmap(listaLugares.get(position).getFotoLug());
+        holder.fotoLug.setImageBitmap(BitmapFactory.decodeByteArray(listaLugares.get(position).getFotoLug(),
+                                0,listaLugares.get(position).getFotoLug().length));
     }
 
     @Override

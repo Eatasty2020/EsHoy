@@ -3,7 +3,7 @@
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <external-path
         name="mis imagenes"
-        path="Android/data/com.appforbit.eatasty/files/pictures" />
+        path="Android/data/com.appforbit.eat1/files/pictures" />
 
 </paths>
 
