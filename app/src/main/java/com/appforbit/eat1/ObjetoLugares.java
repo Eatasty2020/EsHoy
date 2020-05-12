@@ -1,11 +1,5 @@
 package com.appforbit.eat1;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-
-import java.sql.Blob;
-
 public class ObjetoLugares {
     private int idLug =0;
     private String nombreLug ="";
@@ -17,20 +11,22 @@ public class ObjetoLugares {
     private float calificacionLug =0;
     private byte[] fotoLug;
 
+    //Constructores
     public ObjetoLugares() {
     }
 
-    public ObjetoLugares(int idL, String nombreL, String tipoL, String paisL, String ciudadL, String calleL,
-                         String telefonoL, float calificacionL, byte[] fotoL) {
-        this.idLug = idL;
-        this.nombreLug = nombreL;
-        this.tipoLug = tipoL;
-        this.paisLug = paisL;
-        this.ciudadLug = ciudadL;
-        this.calleLug = calleL;
-        this.telefonoLug = telefonoL;
-        this.calificacionLug = calificacionL;
-        this.fotoLug = fotoL;
+    public ObjetoLugares(int idLug,String nombreLug, String tipoLug, String paisLug,
+                         String ciudadLug, String calleLug, String telefonoLug, float calificacionLug,
+                         byte[] fotoLug) {
+        this.idLug = idLug;
+        this.nombreLug = nombreLug;
+        this.tipoLug = tipoLug;
+        this.paisLug = paisLug;
+        this.ciudadLug = ciudadLug;
+        this.calleLug = calleLug;
+        this.telefonoLug = telefonoLug;
+        this.calificacionLug = calificacionLug;
+        this.fotoLug = fotoLug;
     }
 
     //Getters

@@ -1,8 +1,11 @@
 package com.appforbit.eat1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,21 +19,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lugares extends AppCompatActivity {
-    //private ListView listar = null;
-    //private ResultSet rLugares = null;
+
     public Context contexto;
     private RecyclerView recyclerViewLugares;
     private RecyclerLugarAdapter adapterLugares;
+    private Button btnAgregar;
+    private Button btnFiltrar;
+    private int usuario;
+    private Bundle estadoInstancia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lugares);
+        btnAgregar = (Button)findViewById(R.id.btnAgregar);
+        btnFiltrar = (Button)findViewById(R.id.btnFiltrar);
 
         recyclerViewLugares = (RecyclerView)findViewById(R.id.recyclerLugares);
         recyclerViewLugares.setLayoutManager(new LinearLayoutManager(this));
         adapterLugares = new RecyclerLugarAdapter(obtenerLugarBD());
         recyclerViewLugares.setAdapter(adapterLugares);
+        try {
+            btnAgregar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent agregarLugares = new Intent(getApplicationContext(), AgregarLugares.class);
+                    usuario = 1;
+                    agregarLugares.putExtra("idUsuario", usuario);
+                    startActivity(agregarLugares);
+                }
+            });
+            btnFiltrar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    Intent lugares = new Intent(getApplicationContext(), Lugares.class);
+                    //startActivity(lugares);
+                    Toast.makeText(getApplicationContext(), "Sin implementar", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }catch (Exception e){
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     public List<ObjetoLugares> obtenerLugarBD(){
@@ -46,9 +75,7 @@ public class Lugares extends AppCompatActivity {
             while (rs.next()){
                 if (rs.getBytes("fotoL")!=null){
                     fotoByte= rs.getBytes("fotoL");
-                } //else{
-                  //  fotoByte=
-                //}
+                }
                 tipoL=obtenerTipoLugar(rs.getInt("tipoL"));
                 lugares.add(new ObjetoLugares(rs.getInt("idL"), rs.getString("nombreL"),
                         tipoL, rs.getString("paisL"),
@@ -80,4 +107,14 @@ public class Lugares extends AppCompatActivity {
         }
         return tLugar;
     }
- }
+    /*public int RecuperarUsuario(){
+        int user =0;
+        if (estadoInstancia==null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null){
+                user = extras.getInt("idUsuario");
+            }
+        }
+        return user;
+    }*/
+}

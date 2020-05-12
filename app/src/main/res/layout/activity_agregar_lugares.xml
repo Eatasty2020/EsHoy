@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.appforbit.eat1.AgregarLugares">
+
+    <EditText
+        android:id="@+id/nombreET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:hint="Nombre del Lugar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tipoTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Tipo de Lugar"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/nombreET"
+        app:layout_constraintTop_toBottomOf="@+id/nombreET" />
+
+    <Spinner
+        android:id="@+id/tipoLspinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Tipo de Lugar"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/tipoTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toEndOf="@+id/tipoTV"
+        app:layout_constraintTop_toTopOf="@+id/tipoTV" />
+
+    <EditText
+        android:id="@+id/calleET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Dirección"
+        app:layout_constraintStart_toStartOf="@+id/tipoTV"
+        app:layout_constraintTop_toBottomOf="@+id/tipoTV" />
+
+    <EditText
+        android:id="@+id/barrioET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Barrio"
+        app:layout_constraintStart_toStartOf="@+id/calleET"
+        app:layout_constraintTop_toBottomOf="@+id/calleET" />
+
+    <EditText
+        android:id="@+id/ciudadET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Ciudad"
+        app:layout_constraintStart_toStartOf="@+id/barrioET"
+        app:layout_constraintTop_toBottomOf="@+id/barrioET" />
+
+    <EditText
+        android:id="@+id/paisET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="País"
+        app:layout_constraintStart_toStartOf="@+id/ciudadET"
+        app:layout_constraintTop_toBottomOf="@+id/ciudadET" />
+
+    <EditText
+        android:id="@+id/telefonoET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Teléfono"
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="@+id/paisET"
+        app:layout_constraintTop_toBottomOf="@+id/paisET" />
+
+    <EditText
+        android:id="@+id/urlET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="url"
+        android:inputType="textWebEditText"
+        app:layout_constraintStart_toStartOf="@+id/telefonoET"
+        app:layout_constraintTop_toBottomOf="@+id/telefonoET" />
+
+    <CheckBox
+        android:id="@+id/checkDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:inputType="none"
+        android:text="Tiene delivery"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/reseniaTV"
+        app:layout_constraintStart_toStartOf="@+id/urlET"
+        app:layout_constraintTop_toBottomOf="@+id/urlET" />
+
+    <TextView
+        android:id="@+id/calificacionTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calificación"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkDelivery"
+        app:layout_constraintEnd_toStartOf="@+id/calificacionRB"
+        app:layout_constraintStart_toEndOf="@+id/checkDelivery"
+        app:layout_constraintTop_toTopOf="@+id/checkDelivery" />
+
+    <RatingBar
+        android:id="@+id/calificacionRB"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/colorLight"
+        android:tag="Calificación"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/urlET" />
+
+    <EditText
+        android:id="@+id/reseniaTV"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@color/fondoGris"
+        android:editable="true"
+        android:hint="Reseña (máximo 200 caracteres)"
+        android:inputType="textLongMessage|textMultiLine"
+        android:isScrollContainer="true"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/checkDelivery"
+        app:layout_constraintTop_toBottomOf="@+id/calificacionRB" />
+
+    <Button
+        android:id="@+id/btnGeo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorLight"
+        android:text="Geolocalización"
+        app:layout_constraintStart_toStartOf="@+id/reseniaTV"
+        app:layout_constraintTop_toBottomOf="@+id/reseniaTV" />
+
+    <Button
+        android:id="@+id/btnFotoLugar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorLight"
+        android:text="Sacar foto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toEndOf="@+id/btnGeo"
+        app:layout_constraintTop_toBottomOf="@+id/reseniaTV" />
+
+    <CheckBox
+        android:id="@+id/checkCeliaco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Celíaco"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/checkOLV"
+        app:layout_constraintStart_toStartOf="@+id/btnGeo"
+        app:layout_constraintTop_toBottomOf="@+id/btnGeo" />
+
+    <CheckBox
+        android:id="@+id/checkDiabetico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diabético"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkCeliaco"
+        app:layout_constraintEnd_toStartOf="@+id/checkHipertenso"
+        app:layout_constraintHorizontal_bias="0.622"
+        app:layout_constraintStart_toEndOf="@+id/checkCeliaco"
+        app:layout_constraintTop_toTopOf="@+id/checkCeliaco"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/checkHipertenso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:text="Hipertenso"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkDiabetico"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/checkDiabetico"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/checkOLV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="OLVegetariano"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnEnviarLugar"
+        app:layout_constraintStart_toStartOf="@+id/checkCeliaco" />
+
+    <CheckBox
+        android:id="@+id/checkVegano"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="Vegano"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/checkNT"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/checkDiabetico"
+        app:layout_constraintTop_toTopOf="@+id/checkOLV" />
+
+    <CheckBox
+        android:id="@+id/checkNT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No transgénico"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/checkHipertenso"
+        app:layout_constraintTop_toTopOf="@+id/checkVegano" />
+
+    <Button
+        android:id="@+id/btnEnviarLugar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Enviar"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

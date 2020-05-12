@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -20,17 +19,6 @@ public class TomarFoto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tomar_foto);
-        botonCamara = findViewById(R.id.camaraBtn);
-        botonCamara.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tomarFoto();
-            }
-        });
-    }
-
-    private void tomarFoto() {
         Bitmap bitmap = null;
         int rqCode = 0;
         int rsCode = 0;
@@ -39,7 +27,7 @@ public class TomarFoto extends AppCompatActivity {
         Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePic.resolveActivity(getPackageManager())!=null) {
             startActivityForResult(takePic, REQUEST_IMAGE_CAPTURE);
-         }
+        }
     }
 
     @Override
@@ -49,8 +37,8 @@ public class TomarFoto extends AppCompatActivity {
             try {
                 Bundle extras = data.getExtras();
                 fotoBitmap = (Bitmap) extras.get("data");
-                //fotoByte = BitmapUtils.convertBitmapToByteArray(fotoBitmap);
-                data.putExtra("mapa", fotoBitmap);
+                fotoByte = BitmapUtils.convertBitmapToByteArray(fotoBitmap);
+                data.putExtra("mapa", fotoByte);
                 setResult(RESULT_OK, data);
                 finish();
             } catch (Exception e){
