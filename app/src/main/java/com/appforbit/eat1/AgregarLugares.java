@@ -47,17 +47,17 @@ public class AgregarLugares extends AppCompatActivity {
     private CheckBox noTransgenicoL;
     private Button enviarL;
     private int usuarioLugar = -1;
-    private String nombreLugar = null;
-    private int tipoLugar = 0;
-    private String calleLugar = null;
-    private String barrioLugar = null;
-    private String ciudadLugar = null;
-    private String paisLugar = null;
-    private String telefonoLugar = null;
-    private String urlLugar = null;
+    private String nombreLugar;
+    private int tipoLugar;
+    private String calleLugar;
+    private String barrioLugar = "";
+    private String ciudadLugar = "";
+    private String paisLugar = "";
+    private String telefonoLugar = "";
+    private String urlLugar = "";
     private boolean deliveryLugar = false;
     private float calificacionLugar = 0;
-    private String reseniaLugar = null;
+    private String reseniaLugar = "";
     private long latitudLugar = 0;
     private long longitudLugar = 0;
     private byte[] fotoByteLugar = null;
@@ -111,18 +111,18 @@ public class AgregarLugares extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     Bundle extras = getIntent().getExtras();
-                    if (extras!=null) usuarioLugar=extras.getInt("usuarioId");
-                    if (nombreL!=null) nombreLugar = nombreL.toString();
+                    if (extras!=null) usuarioLugar=extras.getInt("idUsuario");
+                    if (nombreL!=null) nombreLugar = nombreL.getText().toString();
                     if (tipoL!=null) tipoLugar =obtenerTipoLugarInt(tipoL.getSelectedItem().toString(),listaOpciones);
-                    if (calleL!=null) calleLugar = calleL.toString();
-                    if (barrioL!=null) barrioLugar = barrioL.toString();
-                    if (ciudadL!=null) ciudadLugar = ciudadL.toString();
-                    if (paisL!=null) paisLugar = paisL.toString();
-                    telefonoLugar = telefonoL.toString();
-                    urlLugar = urlL.toString();
+                    if (calleL!=null) calleLugar = calleL.getText().toString();
+                    if (barrioL!=null) barrioLugar = barrioL.getText().toString();
+                    if (ciudadL!=null) ciudadLugar = ciudadL.getText().toString();
+                    if (paisL!=null) paisLugar = paisL.getText().toString();
+                    telefonoLugar = telefonoL.getText().toString();
+                    urlLugar = urlL.getText().toString();
                     deliveryLugar = deliveryL.isChecked();
                     calificacionLugar = calificacionL.getRating();
-                    reseniaLugar = reseniaL.toString();
+                    reseniaLugar = reseniaL.getText().toString();
                     if (geolocalizadoB=true){}
                     fotoByteLugar = fotoByte;
                     celiacoLugar = celiacoL.isChecked();
@@ -138,6 +138,10 @@ public class AgregarLugares extends AppCompatActivity {
                     consulta = "INSERT INTO lugares (idLU, nombreL, tipoL, calleL, barrioL, ciudadL, paisL, telefonoL, "
                             + "urlL, deliveryL, calificacionL, reseniaL, latitudL, longitudL, fotoL, celiacoL, diabeticoL, "
                             + "hipertensoL, olvL, veganoL, noTransgenicoL) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                    /*consulta = "INSERT INTO [eatasty].[dbo].[lugares] (idLU, nombreL)" +
+                            " VALUES(?,?)";*/
+
                     try {
                         PreparedStatement statement = null;
                         statement = conexion.prepareStatement(consulta);
@@ -150,19 +154,46 @@ public class AgregarLugares extends AppCompatActivity {
                         statement.setString(7, paisLugar);
                         statement.setString(8, telefonoLugar);
                         statement.setString(9, urlLugar);
-                        statement.setBoolean(10, deliveryLugar);
+                        if (deliveryLugar== true){
+                            statement.setInt(10,  1);
+                        }else {
+                            statement.setInt(10,  0);
+                        }
                         statement.setFloat(11, calificacionLugar);
                         statement.setString(12, reseniaLugar);
                         statement.setLong(13, latitudLugar);
                         statement.setLong( 14, longitudLugar);
                         statement.setBytes(15, fotoByteLugar);
-                        statement.setBoolean(16, celiacoLugar);
-                        statement.setBoolean(17, diabeticoLugar);
-                        statement.setBoolean(18, hipertensoLugar);
-                        statement.setBoolean(19, olvLugar);
-                        statement.setBoolean(20, veganoLugar);
-                        statement.setBoolean(21, noTransgenicoLugar);
-                        ancho = statement.getMaxFieldSize();
+                        if (celiacoLugar==true) {
+                            statement.setInt(16,  1);
+                        }else {
+                            statement.setInt(16,  0);
+                        }
+                        if (diabeticoLugar==true) {
+                            statement.setInt(17,  1);
+                        }else {
+                            statement.setInt(17,  0);
+                        }
+                        if (hipertensoLugar==true) {
+                            statement.setInt(18,  1);
+                        }else {
+                            statement.setInt(18,  0);
+                        }
+                        if (olvLugar==true) {
+                            statement.setInt(19,  1);
+                        }else {
+                            statement.setInt(19,  0);
+                        }
+                        if (veganoLugar==true) {
+                            statement.setInt(20,  1);
+                        }else {
+                            statement.setInt(20,  0);
+                        }
+                        if (noTransgenicoLugar==true) {
+                            statement.setInt(21,  1);
+                        }else {
+                            statement.setInt(21,  0);
+                        }
                         statement.executeUpdate();
                         mensaje = "Registro agregado correctamente ...";
                     } catch (SQLException e){
