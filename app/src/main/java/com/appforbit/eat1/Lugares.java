@@ -2,16 +2,22 @@ package com.appforbit.eat1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -44,7 +50,7 @@ public class Lugares extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent agregarLugares = new Intent(getApplicationContext(), AgregarLugares.class);
-                    usuario = 1;
+                    usuario = RecuperarUsuario();
                     agregarLugares.putExtra("idUsuario", usuario);
                     startActivity(agregarLugares);
                 }
@@ -57,13 +63,15 @@ public class Lugares extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Sin implementar", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }catch (Exception e){
+        }catch (Exception e){
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
     public List<ObjetoLugares> obtenerLugarBD(){
         List<ObjetoLugares> lugares = new ArrayList<>();
+        Resources res = getResources();
+        Drawable drawable = null;
         Bitmap fotoBit = null;
         byte[] fotoByte = null;
         String tipoL = "";
@@ -74,7 +82,12 @@ public class Lugares extends AppCompatActivity {
             ResultSet rs = st.executeQuery(consulta);
             while (rs.next()){
                 if (rs.getBytes("fotoL")!=null){
-                    fotoByte= rs.getBytes("fotoL");
+                    fotoByte = rs.getBytes("fotoL");
+                }else{
+                    fotoBit = BitmapFactory.decodeResource(getResources(), R.drawable.camara);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    fotoBit.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    fotoByte = stream.toByteArray();
                 }
                 tipoL=obtenerTipoLugar(rs.getInt("tipoL"));
                 lugares.add(new ObjetoLugares(rs.getInt("idL"), rs.getString("nombreL"),
@@ -107,7 +120,7 @@ public class Lugares extends AppCompatActivity {
         }
         return tLugar;
     }
-    /*public int RecuperarUsuario(){
+    public int RecuperarUsuario(){
         int user =0;
         if (estadoInstancia==null) {
             Bundle extras = getIntent().getExtras();
@@ -116,5 +129,5 @@ public class Lugares extends AppCompatActivity {
             }
         }
         return user;
-    }*/
+    }
 }

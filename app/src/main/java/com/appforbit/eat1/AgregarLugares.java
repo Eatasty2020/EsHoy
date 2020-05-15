@@ -58,8 +58,8 @@ public class AgregarLugares extends AppCompatActivity {
     private boolean deliveryLugar = false;
     private float calificacionLugar = 0;
     private String reseniaLugar = "";
-    private long latitudLugar = 0;
-    private long longitudLugar = 0;
+    private double latitudLugar = 0;
+    private double longitudLugar = 0;
     private byte[] fotoByteLugar = null;
     private boolean celiacoLugar = false;
     private boolean diabeticoLugar = false;
@@ -123,7 +123,10 @@ public class AgregarLugares extends AppCompatActivity {
                     deliveryLugar = deliveryL.isChecked();
                     calificacionLugar = calificacionL.getRating();
                     reseniaLugar = reseniaL.getText().toString();
-                    if (geolocalizadoB=true){}
+                    /*if (geolocalizadoB=true){
+                        extras.getDouble("latitudL", latitudLugar);
+                        extras.getDouble("longitudL", longitudLugar);
+                    }*/
                     fotoByteLugar = fotoByte;
                     celiacoLugar = celiacoL.isChecked();
                     diabeticoLugar = diabeticoL.isChecked();
@@ -138,10 +141,6 @@ public class AgregarLugares extends AppCompatActivity {
                     consulta = "INSERT INTO lugares (idLU, nombreL, tipoL, calleL, barrioL, ciudadL, paisL, telefonoL, "
                             + "urlL, deliveryL, calificacionL, reseniaL, latitudL, longitudL, fotoL, celiacoL, diabeticoL, "
                             + "hipertensoL, olvL, veganoL, noTransgenicoL) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-                    /*consulta = "INSERT INTO [eatasty].[dbo].[lugares] (idLU, nombreL)" +
-                            " VALUES(?,?)";*/
-
                     try {
                         PreparedStatement statement = null;
                         statement = conexion.prepareStatement(consulta);
@@ -161,8 +160,8 @@ public class AgregarLugares extends AppCompatActivity {
                         }
                         statement.setFloat(11, calificacionLugar);
                         statement.setString(12, reseniaLugar);
-                        statement.setLong(13, latitudLugar);
-                        statement.setLong( 14, longitudLugar);
+                        statement.setDouble(13, latitudLugar);
+                        statement.setDouble( 14, longitudLugar);
                         statement.setBytes(15, fotoByteLugar);
                         if (celiacoLugar==true) {
                             statement.setInt(16,  1);
@@ -226,7 +225,9 @@ public class AgregarLugares extends AppCompatActivity {
             geolocalizarL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "Sin implementar", Toast.LENGTH_SHORT).show();
+                    Intent localizar = new Intent(getApplicationContext(), Localizar.class);
+                    startActivityForResult(localizar, 5678);
+                    //Toast.makeText(getApplicationContext(), "Sin implementar", Toast.LENGTH_SHORT).show();
                 }
             });
         }catch (Exception e){
@@ -237,20 +238,26 @@ public class AgregarLugares extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1234 && resultCode == RESULT_OK){
+        if (((requestCode == 1234) || (requestCode ==5678)) && resultCode == RESULT_OK){
             try {
-                Bundle extras = data.getExtras();
-                fotoByte = (byte[]) extras.getByteArray("mapa");
-                data.putExtra("mapa",fotoByte);
-                setResult(RESULT_OK, data);
+                if (requestCode == 1234){
+                    Bundle extras = data.getExtras();
+                    fotoByte = (byte[]) extras.getByteArray("mapa");
+                    data.putExtra("mapa",fotoByte);
+                    setResult(RESULT_OK, data);
+                }
+                if (requestCode == 5678){
+                    Bundle bundle = data.getExtras();
+                    if (bundle!=null) {
+                        geolocalizadoB = true;
+                        latitudLugar = bundle.getDouble("latitud");
+                        longitudLugar = bundle.getDouble("longitud");
+                    }
+                }
             } catch (Exception e){
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    private void agregarLugar(int u, String nL, int tl, String ca, String ba, String ci, String pa, String te, String uL, boolean dL,
-                              float cL, String rL, long laL, long loL, byte[] fL, boolean ce, boolean di, boolean hi, boolean olv, boolean ve, boolean nt){
     }
 
     private int obtenerTipoLugarInt(String opcionLugarString, List<ObjetoTipoLugar> tLugar){
